@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Dark Storm Configuration</title>
+
+
+        <!-- compiled css output -->
+        <link href="css/ionic.app.css" rel="stylesheet">
+
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+        <!-- your app's js -->
+        <script src="js/app.js"></script>
+    </head>
+    <body ng-controller="MainCtrl">
+       
+        <ion-pane>
+            <ion-header-bar class="bar-positive">
+                <h1 class="title">Dark Storm Configuration</h1>
+            </ion-header-bar>
+            <ion-content>
+      
+            <div class="list">
+                <div class="item item-divider item-calm"> 
+                    Temperature units: º{{ data.tempUnit }}
+                </div>
+                <ion-radio ng-repeat="item in tempUnits"
+                           ng-value="item.value"
+                           ng-model="data.tempUnit">
+                    {{ item.text }}
+                </ion-radio>
+                
+                <div class="item item-divider item-calm"> 
+                    Color Layout
+                </div>
+                <ion-toggle ng-model="data.inverted"
+                            ng-value="data.inverted">
+                    Inverted
+                </ion-toggle>
+                
+                <div class="item item-divider item-calm">
+                    Location
+                </div>
+                <ion-toggle ng-model="data.gps"
+                            ng-value="data.gps">
+                    Use GPS
+                </ion-toggle>
+                <label ng-show="!data.gps" class="item item-input">
+                    <span class="input-label">Location name</span>
+                    <input type="text" ng-model="data.location" placeholder="Eg: City Name">
+                </label>
+                
+                <div class="item item-divider item-calm">
+                    Data refresh (minutes)
+                </div>
+                <div class="item range range-positive">
+                    <i class="icon ion-ios-refresh-empty"></i>
+                    <input ng-model="data.refresh" type="range" name="volume" min="5" max="300" value="30">
+                    <span>{{data.refresh}}min</span>
+                </div>
+                
+                <button ng-click="saveData()" class="button button-full button-positive">
+                    Save
+                </button>
+                
+                <button ng-click="cancel()" on-tap="cancel" class="button button-full button-assertive">
+                    Cancel
+                </button>
+                
+            </div>
+        </ion-pane>
+    </body>
+</html>
