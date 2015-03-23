@@ -11,7 +11,7 @@ angular.module('ionicApp', ['ionic'])
     $scope.data = {
         temp_unit: 'C',
         inverted: false,
-        location: '',
+        location_string: '',
         gps: true,
         refresh: 30
     };
