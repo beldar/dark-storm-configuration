@@ -25,11 +25,11 @@
       
             <div class="list">
                 <div class="item item-divider item-calm"> 
-                    Temperature units: º{{ data.temp_unit }}
+                    Temperature units: º{{ data.weather_scale }}
                 </div>
                 <ion-radio ng-repeat="item in tempUnits"
                            ng-value="item.value"
-                           ng-model="data.temp_unit">
+                           ng-model="data.weather_scale">
                     {{ item.text }}
                 </ion-radio>
                 
@@ -50,7 +50,7 @@
                 </ion-toggle>
                 <label ng-show="!data.gps" class="item item-input">
                     <span class="input-label">Location name</span>
-                    <input type="text" ng-model="data.location_string" placeholder="Eg: City Name">
+                    <input type="text" ng-model="data.location_str" placeholder="Eg: City Name">
                 </label>
                 
                 <div class="item item-divider item-calm">

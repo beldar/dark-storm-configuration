@@ -1,19 +1,23 @@
 angular.module('ionicApp', ['ionic'])
 
-.controller('MainCtrl', ['$scope', '$window', function($scope, $window) {
-
+.controller('MainCtrl', function($scope, $window) {
+    function getURLParameter(name) {
+        var r = decodeURI(
+                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+        return r === 'null' ? false : r;
+    }
     $scope.tempUnits = [
         { text: 'Celcius', value: 'C' },
-        { text: 'Farenheit', value: 'F' },
-        { text: 'Kelvin', value: 'K' }
+        { text: 'Farenheit', value: 'F' }
     ];
     
     $scope.data = {
-        temp_unit: 'C',
-        inverted: false,
-        location_string: '',
-        gps: true,
-        refresh: 30
+        weather_scale: getURLParameter('u') ? getURLParameter('u') : 'C',
+        inverted: getURLParameter('i') && getURLParameter('i') === '1' ? true : false,
+        location_str: getURLParameter('l') ?  getURLParameter('l') : '',
+        gps: getURLParameter('g') === '0' ? false : true,
+        refresh: getURLParameter('r') ?  getURLParameter('r') : 30 
     };
     
     $scope.saveData = function() {
@@ -26,4 +30,4 @@ angular.module('ionicApp', ['ionic'])
         $window.location.href = 'pebblejs://close';
     };
 
-}]);
+});
